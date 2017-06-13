@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    HashRouter as Router,//容器
+    BrowserRouter as Router,//容器
     Route, //一条路由
     Link
 } from 'react-router-dom';
