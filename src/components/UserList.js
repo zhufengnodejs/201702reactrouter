@@ -16,13 +16,12 @@ export default class UserList extends Component{
         return (
             <ul className="list-group">
                 {
-                    this.state.users.map(user=>(
-                        <li className="list-group-item">
+                    this.state.users.map((user,index)=>(
+                        <li key={index} className="list-group-item">
                             <Link to={"/user/detail/"+user.id}>{user.name}</Link>
                         </li>
                     ))
                 }
-
             </ul>
         )
     }
