@@ -4,13 +4,17 @@
 // props= {path:"/profile",component:Profile}
 // rest = {path:"/profile"}
 //<Route path="/profile"/>
+//location 当前路径 pathname    /profile
+//history 可以用来跳转路径
+//match 匹配对象，匹配上有就值，匹配不上就没有值
+//是当前路径和Route的path属性匹配的结果
 import React from 'react';
 import {Redirect,Route} from 'react-router-dom';
-export default function({component:Component,...rest}){
+export default function({component:Xxx,...rest}){
    return <Route {...rest} render={(props)=>
-       localStorage.getItem('login')?<Component/>:<Redirect to={{
+       localStorage.getItem('login')?<Xxx/>:<Redirect to={{
            pathname:'/login',
-           state:{from:props.location.pathname}
+           yyy:props.location.pathname// /profile
        }}/>
    }/>
 }
