@@ -1,4 +1,5 @@
 import {createStore} from './redux';
+import $ from 'jquery';
 //就是管理员函数，
 //state是旧的状态对象，action是动作对象 {type:'INCREMENT'}
 let reducer = (state=0,action={})=>{
@@ -11,5 +12,15 @@ let reducer = (state=0,action={})=>{
             return state;
     }
 }
+
 let store = createStore(reducer);
+
+$(document.body).append(`
+<div>
+  <p id="counter"></p>
+  <button id="addBtn">+</button>
+  <button id="subBtn">-</button>
+</div>
+`);
+
 
