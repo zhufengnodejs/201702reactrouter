@@ -34,4 +34,4 @@ let combineReducers = (reducers)=>{
      return result;
   }
 }
-export {createStore};
+export {createStore,combineReducers};
