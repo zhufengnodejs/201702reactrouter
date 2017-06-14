@@ -10,6 +10,7 @@ import Home from './Home';//主页
 import User from './User';//用户
 import Profile from './Profile';//个人设置
 import Login from './Login';
+import MenuLink from './MenuLink';
 import ProtectedRoute from './ProtectedRoute';
 /**
  * 当用户访问个人设置的时候，先判断此用户是否已经登录，如果已经登录则可以直接显示个人设置页面。如果此用户未登录，那么则跳转到登录页面进行登录，如果登录成功则自动跳回登录前的页面。
@@ -26,9 +27,9 @@ export default (
                         </div>
                     </div>
                     <ul className="nav navbar-nav">
-                        <li><Link to="/home">首页</Link></li>
-                        <li><Link to="/user">用户管理</Link></li>
-                        <li><Link to="/profile">个人设置</Link></li>
+                        <MenuLink text="首页" to="/home"/>
+                        <MenuLink text="用户管理" to="/user"/>
+                        <MenuLink text="个人设置" to="/profile"/>
                     </ul>
                 </div>
             </nav>
