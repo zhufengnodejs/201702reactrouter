@@ -24,4 +24,14 @@ let createStore = (reducer)=>{
         dispatch //派发action 改变状态 使监听函数执行
     }
 }
+//把多个reducer合并成一个reducer
+let combineReducers = (reducers)=>{
+  return (state,action)=>{
+     let result = {};
+     for(var key in reducers){ //todos filter
+         result[key] = reducers[key](state[key],action);
+     }
+     return result;
+  }
+}
 export {createStore};
