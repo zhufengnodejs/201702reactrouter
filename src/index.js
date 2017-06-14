@@ -34,10 +34,22 @@ class Todos extends React.Component {
     }
 }
 class Filter extends React.Component {
+    constructor(){
+        super();
+        this.state = {filter:'all'};
+    }
     render() {
         return (
             <div>
-
+                {
+                    this.state.filter=='all'?<span>全部</span>:<button onClick={()=>this.setState({filter:'all'})}>全部</button>
+                }
+                {
+                    this.state.filter=='active'?<span>未完成</span>:<button onClick={()=>this.setState({filter:'active'})}>未完成</button>
+                }
+                {
+                    this.state.filter=='completed'?<span>已完成</span>:<button  onClick={()=>this.setState({filter:'completed'})}>已完成</button>
+                }
             </div>
         )
     }
