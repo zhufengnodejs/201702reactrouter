@@ -32,8 +32,10 @@ class Todos extends React.Component {
         }
     }
     handleClick = (id)=>{
-        let todos = this.state.todos.filter(todo=>todo.id != id);
-        this.setState({todos});
+       store.dispatch({
+           type:actionTypes.DEL_TODO,
+           id
+       })
     }
     render() {
         return (
@@ -41,7 +43,7 @@ class Todos extends React.Component {
                 <input type="text" onKeyDown={this.handleKeyDown}/>
                 <ul>
                     {
-                        this.state.todos.map(todo=><li>{todo.content} <button onClick={()=>this.handleClick(todo.id)}>-</button></li>)
+                        this.state.todos.map((todo,index)=><li key={index}>{todo.content} <button onClick={()=>this.handleClick(todo.id)}>-</button></li>)
                     }
                 </ul>
             </div>
@@ -53,17 +55,25 @@ class Filter extends React.Component {
         super();
         this.state = {filter:'all'};
     }
+    componentWillMount(){
+        store.subscribe(()=>{
+            this.setState({
+                filter:store.getState().filter
+            });
+        })
+    }
     render() {
+        console.log(this.state);
         return (
             <div>
                 {
-                    this.state.filter=='all'?<span>全部</span>:<button onClick={()=>this.setState({filter:'all'})}>全部</button>
+                    this.state.filter=='all'?<span>全部</span>:<button onClick={()=>store.dispatch({type:actionTypes.CHANGE_FILTER,filter:'all'})}>全部</button>
                 }
                 {
-                    this.state.filter=='active'?<span>未完成</span>:<button onClick={()=>this.setState({filter:'active'})}>未完成</button>
+                    this.state.filter=='active'?<span>未完成</span>:<button onClick={()=>store.dispatch({type:actionTypes.CHANGE_FILTER,filter:'active'})}>未完成</button>
                 }
                 {
-                    this.state.filter=='completed'?<span>已完成</span>:<button  onClick={()=>this.setState({filter:'completed'})}>已完成</button>
+                    this.state.filter=='completed'?<span>已完成</span>:<button  onClick={()=>store.dispatch({type:actionTypes.CHANGE_FILTER,filter:'completed'})}>已完成</button>
                 }
             </div>
         )
