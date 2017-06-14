@@ -1,15 +1,33 @@
+import store from '../store';
+import React from 'react';
+import * as actionTypes from '../store/action-types';
 class Todos extends React.Component {
     constructor(){
         super();
         this.state = {todos:[]};
     }
+    //组件将要挂载
+    componentWillMount(){
+        store.subscribe(()=>{
+            let todos = store.getState().todos;
+            let filter = store.getState().filter;
+            todos = todos.filter(todo=>{
+                switch (filter){
+                    case 'active'://只显示活动状态的todo的话
+                        return !todo.completed;
+                    case 'completed':
+                        return todo.completed;
+                    default:
+                        return true;
+                }
+            });
+            this.setState({todos});
+        })
+    }
     handleKeyDown = (event)=>{
         if(event.keyCode == 13 ){
             let content = event.target.value;
-            this.state.todos.push({
-                id:Date.now(), content, completed:false
-            });
-            this.setState({todos:this.state.todos});
+            store.dispatch({type:actionTypes.ADD_TODO,content})
             event.target.value = '';
         }
     }

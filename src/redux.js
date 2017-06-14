@@ -26,7 +26,7 @@ let createStore = (reducer)=>{
 }
 //把多个reducer合并成一个reducer
 let combineReducers = (reducers)=>{
-  return (state,action)=>{
+  return (state={},action={})=>{
      let result = {};
      for(var key in reducers){ //todos filter
          result[key] = reducers[key](state[key],action);

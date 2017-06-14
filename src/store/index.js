@@ -1,5 +1,5 @@
 import * as actionTypes from './action-types';
-import {combineReducers} from '../redux';
+import {createStore,combineReducers} from '../redux';
 //todo组件的reducer
 let todos = (state=[],action={})=>{
   switch (action.type){
@@ -27,6 +27,8 @@ let reducer = combineReducers({
     filter
 });
 
+let store = createStore(reducer);
+export default store;
 /**
  * {
  *  todos:[],
